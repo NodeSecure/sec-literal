@@ -1,0 +1,29 @@
+{
+  "name": "sec-literal",
+  "version": "1.0.0",
+  "description": "Package created to analyze JavaScript literals",
+  "types": "./index.d.ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fraxken/sec-literal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fraxken/sec-literal/issues"
+  },
+  "homepage": "https://github.com/fraxken/sec-literal#readme",
+  "devDependencies": {
+    "@slimio/eslint-config": "^4.1.0",
+    "@types/node": "^14.14.2"
+  },
+  "dependencies": {
+    "is-base64": "^1.1.0",
+    "is-svg": "^4.2.1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "extends": "@slimio/eslint-config",
+    "rules": {
+        "jsdoc/require-jsdoc": "off",
+        "lines-between-class-members": "off"
+    }
+}
