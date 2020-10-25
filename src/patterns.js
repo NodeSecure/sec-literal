@@ -1,6 +1,17 @@
 "use strict";
 
-function commonStringStart(leftStr, rightStr) {
+/**
+ * @description get the common string prefix (at the start) pattern
+ * @param {!string} leftStr
+ * @param {!string} rightStr
+ * @returns {string | null}
+ *
+ * @example
+ * commonStringPrefix("boo", "foo"); // null
+ * commonStringPrefix("bromance", "brother"); // "bro"
+ */
+function commonStringPrefix(leftStr, rightStr) {
+    // The length of leftStr cannot be greater than that rightStr
     const minLen = leftStr.length > rightStr.length ? rightStr.length : leftStr.length;
     let commonStr = "";
 
@@ -29,7 +40,7 @@ function commonPrefix(arr, sort = "high") {
         }
 
         for (const commonPrefix of prefix.keys()) {
-            const commonStr = commonStringStart(currentPrefix, commonPrefix);
+            const commonStr = commonStringPrefix(currentPrefix, commonPrefix);
             if (commonStr === null) {
                 continue;
             }
@@ -65,6 +76,6 @@ function commonPrefix(arr, sort = "high") {
 }
 
 module.exports = {
-    commonStringStart,
+    commonStringPrefix,
     commonPrefix
 };

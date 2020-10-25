@@ -1,4 +1,5 @@
 declare namespace SecLiteral {
+    // @see https://github.com/estree/estree/blob/master/es5.md#literal
     interface Literal {
         type: string;
         value: string;

@@ -1,5 +1,8 @@
 "use strict";
 
+// Require Third-party Dependencies
+const stringWidth = require("string-width");
+
 /**
  * @description detect if a given string is a svg path or not.
  * @param {!string} str svg path literal
@@ -11,7 +14,7 @@ function isSvgPath(str) {
     }
     const trimStr = str.trim();
 
-    return /^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(trimStr) && /[\dz]$/i.test(trimStr) && trimStr.length > 4;
+    return trimStr.length > 4 && /^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(trimStr) && /[\dz]$/i.test(trimStr);
 }
 
 /**
@@ -35,7 +38,8 @@ const kScoreStringLengthThreshold = 750;
  * @returns {number}
  */
 function stringSuspicionScore(str) {
-    if (str.length < kMaxSafeStringLen) {
+    const strLen = stringWidth(str);
+    if (strLen < kMaxSafeStringLen) {
         return 0;
     }
 
@@ -43,8 +47,8 @@ function stringSuspicionScore(str) {
     const includeSpaceAtStart = includeSpace ? str.slice(0, kMaxSafeStringLen).includes(" ") : false;
 
     let suspectScore = includeSpaceAtStart ? 0 : 1;
-    if (str.length > kMinUnsafeStringLenThreshold) {
-        suspectScore += Math.floor(str.length / kScoreStringLengthThreshold);
+    if (strLen > kMinUnsafeStringLenThreshold) {
+        suspectScore += Math.ceil(strLen / kScoreStringLengthThreshold);
     }
 
     return stringCharDiversity(str) >= kMaxSafeStringCharDiversity ? suspectScore + 2 : suspectScore;
