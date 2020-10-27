@@ -33,10 +33,13 @@ function isSafe(anyValue) {
         return true;
     }
 
-    return [...kSafeHexValues].some((value) => value.startsWith(rawValue));
+    return [...kSafeHexValues].some((value) => rawValue.startsWith(value));
 }
 
 module.exports = {
     isHex,
-    isSafe
+    isSafe,
+    CONSTANTS: Object.freeze({
+        SAFE_HEXA_VALUES: [...kSafeHexValues]
+    })
 };

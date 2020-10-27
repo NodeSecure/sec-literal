@@ -1,7 +1,25 @@
 "use strict";
 
+/**
+ * @typedef { import("../index").SecLiteral } SecLiteral
+ */
+
 // Require Third-party Dependencies
+const isStringSvg = require("is-svg");
 const stringWidth = require("string-width");
+
+// Require Internal Dependencies
+const { toValue } = require("./literal");
+
+/**
+ * @param {SecLiteral.Literal | string} strOrLiteral
+ * @returns {boolean}
+ */
+function isSvg(strOrLiteral) {
+    const value = toValue(strOrLiteral);
+
+    return isStringSvg(value) || isSvgPath(value);
+}
 
 /**
  * @description detect if a given string is a svg path or not.
@@ -55,6 +73,7 @@ function stringSuspicionScore(str) {
 }
 
 module.exports = {
+    isSvg,
     isSvgPath,
     stringCharDiversity,
     stringSuspicionScore

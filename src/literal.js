@@ -6,10 +6,6 @@
 
 // Require Third-party Dependencies
 const isStringBase64 = require("is-base64");
-const isStringSvg = require("is-svg");
-
-// Require Internal Dependencies
-const { isSvgPath } = require("./utils");
 
 /**
  * @param {SecLiteral.Literal | string} anyValue
@@ -52,20 +48,9 @@ function defaultAnalysis(literalValue) {
     return { hasHexadecimalSequence, hasUnicodeSequence, isBase64 };
 }
 
-/**
- * @param {SecLiteral.Literal | string} strOrLiteral
- * @returns {boolean}
- */
-function isSvg(strOrLiteral) {
-    const value = toValue(strOrLiteral);
-
-    return isStringSvg(value) || isSvgPath(value);
-}
-
 module.exports = {
     isLiteral,
     toValue,
     toRaw,
-    isSvg,
     defaultAnalysis
 };

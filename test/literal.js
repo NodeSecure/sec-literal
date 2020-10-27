@@ -1,17 +1,11 @@
 "use strict";
 
+// Require Node.js Dependencies
+const { randomBytes } = require("crypto");
+
 // Require Internal Dependencies
-const { isLiteral, toValue, toRaw } = require("../src/literal");
-
-// @see https://github.com/estree/estree/blob/master/es5.md#literal
-function createLiteral(value, includeRaw = false) {
-    const node = { type: "Literal", value };
-    if (includeRaw) {
-        node.raw = value;
-    }
-
-    return node;
-}
+const { isLiteral, toValue, toRaw, defaultAnalysis } = require("../src/literal");
+const { createLiteral } = require("./utils/index");
 
 test("isLiteral must return true for a valid ESTree Literal Node", () => {
     const literalSample = createLiteral("boo");
@@ -33,4 +27,44 @@ test("toRaw must return a string when we give a valid EStree Literal", () => {
 
     expect(toRaw(literalSample)).toStrictEqual("boo");
     expect(toRaw("hey")).toStrictEqual("hey");
+});
+
+test("defaultAnalysis() of something else than a Literal must always return null", () => {
+    expect(defaultAnalysis(10)).toStrictEqual(null);
+});
+
+test("defaultAnalysis() of an Hexadecimal value", () => {
+    const hexValue = randomBytes(10).toString("hex");
+
+    const result = defaultAnalysis(createLiteral(hexValue, true));
+    expect(result).toMatchObject({
+        isBase64: true, hasHexadecimalSequence: false, hasUnicodeSequence: false
+    });
+});
+
+test("defaultAnalysis() of an Base64 value", () => {
+    const hexValue = randomBytes(10).toString("base64");
+
+    const result = defaultAnalysis(createLiteral(hexValue, true));
+    expect(result).toMatchObject({
+        isBase64: true, hasHexadecimalSequence: false, hasUnicodeSequence: false
+    });
+});
+
+test("defaultAnalysis() of an Hexadecimal Sequence", () => {
+    const hexSequence = createLiteral("'\\x64\\x61\\x74\\x61'", true);
+
+    const result = defaultAnalysis(hexSequence);
+    expect(result).toMatchObject({
+        isBase64: false, hasHexadecimalSequence: true, hasUnicodeSequence: false
+    });
+});
+
+test("defaultAnalysis() with a Literal with no 'raw' property must return two null values", () => {
+    const hexValue = randomBytes(10).toString("base64");
+
+    const result = defaultAnalysis(createLiteral(hexValue));
+    expect(result).toMatchObject({
+        isBase64: true, hasHexadecimalSequence: null, hasUnicodeSequence: null
+    });
 });

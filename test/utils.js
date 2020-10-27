@@ -5,11 +5,26 @@
 const { randomBytes } = require("crypto");
 
 // Require Internal Dependencies
-const { stringCharDiversity, isSvgPath, stringSuspicionScore } = require("../src/utils");
+const { stringCharDiversity, isSvg, isSvgPath, stringSuspicionScore } = require("../src/utils");
 
 test("stringCharDiversity must return the number of unique chars in a given string", () => {
     expect(stringCharDiversity("helloo!"))
         .toStrictEqual(5, "the following string 'helloo!' contains five unique chars: h, e, l, o and !");
+});
+
+test("isSvg must return true for an HTML svg balise", () => {
+    const SVGHTML = `<svg xmlns="http://www.w3.org/2000/svg"
+        width="150" height="100" viewBox="0 0 3 2">
+
+        <rect width="1" height="2" x="0" fill="#008d46" />
+        <rect width="1" height="2" x="1" fill="#ffffff" />
+        <rect width="1" height="2" x="2" fill="#d2232c" />
+    </svg>`;
+    expect(isSvg(SVGHTML)).toStrictEqual(true);
+});
+
+test("isSvg of a SVG Path must return true", () => {
+    expect(isSvg("M150 0 L75 200 L225 200 Z")).toStrictEqual(true);
 });
 
 test("isSvgPath must return true when we give a valid svg path and false when the string is not valid", () => {
