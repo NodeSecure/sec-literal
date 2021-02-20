@@ -26,7 +26,44 @@ $ yarn add sec-literal
 
 ## API
 
-WORK IN PROGRESS
+## Hex
+
+### isHex(anyValue): boolean
+Detect if the given string is an Hexadecimal value
+
+### isSafe(anyValue): boolean
+Detect if the given string is a safe Hexadecimal value. The goal of this method is to eliminate false-positive.
+
+```js
+Hex.isSafe("1234"); // true
+Hex.isSafe("abcdef"); // true
+```
+
+## Literal
+
+### isLiteral(anyValue): boolean
+### toValue(anyValue): string
+### toRaw(anyValue): string
+### defaultAnalysis(literalValue)
+
+## Utils
+
+### isSvg(strValue): boolean
+
+### isSvgPath(strValue): boolean
+Detect if a given string is a svg path or not.
+
+### stringCharDiversity(str): number
+Get the number of unique chars in a given string
+
+### stringSuspicionScore(str): number
+Analyze a given string an give it a suspicion score (higher than 1 or 2 mean that the string is highly suspect).
+
+## Patterns
+
+### commonStringPrefix(leftStr, rightStr): string | null
+### commonStringSuffix(leftStr, rightStr): string | null
+### commonHexadecimalPrefix(identifiersArray: string[])
 
 ## License
 MIT

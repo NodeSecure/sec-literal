@@ -1,9 +1,5 @@
 "use strict";
 
-/**
- * @typedef { import("../index").SecLiteral } SecLiteral
- */
-
 // Require Internal Dependencies
 const Literal = require("./literal");
 

@@ -1,9 +1,5 @@
 "use strict";
 
-/**
- * @typedef { import("../index").SecLiteral } SecLiteral
- */
-
 // Require Third-party Dependencies
 const isStringSvg = require("is-svg");
 const stringWidth = require("string-width");

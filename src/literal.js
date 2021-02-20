@@ -1,9 +1,5 @@
 "use strict";
 
-/**
- * @typedef { import("../index").SecLiteral } SecLiteral
- */
-
 // Require Third-party Dependencies
 const isStringBase64 = require("is-base64");
 
