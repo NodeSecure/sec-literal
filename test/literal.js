@@ -51,7 +51,16 @@ test("defaultAnalysis() of an Base64 value", () => {
     });
 });
 
-test("defaultAnalysis() of an Hexadecimal Sequence", () => {
+test("defaultAnalysis() of an Unicode Sequence", () => {
+    const unicodeSequence = createLiteral("'\\u0024\\u0024'", true);
+
+    const result = defaultAnalysis(unicodeSequence);
+    expect(result).toMatchObject({
+        isBase64: false, hasHexadecimalSequence: false, hasUnicodeSequence: true
+    });
+});
+
+test("defaultAnalysis() of an Unicode Sequence", () => {
     const hexSequence = createLiteral("'\\x64\\x61\\x74\\x61'", true);
 
     const result = defaultAnalysis(hexSequence);

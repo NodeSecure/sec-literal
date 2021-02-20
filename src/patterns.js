@@ -1,16 +1,29 @@
 "use strict";
 
 /**
+ * @typedef { import("../index").SecLiteral } SecLiteral
+ */
+
+// Require Third-party Dependencies
+const FrequencySet = require("frequency-set");
+
+// Require Internal Dependencies
+const Literal = require("./literal");
+
+/**
  * @description get the common string prefix (at the start) pattern
- * @param {!string} leftStr
- * @param {!string} rightStr
+ * @param {!string | SecLiteral} leftAnyValue
+ * @param {!string | SecLiteral} rightAnyValue
  * @returns {string | null}
  *
  * @example
  * commonStringPrefix("boo", "foo"); // null
  * commonStringPrefix("bromance", "brother"); // "bro"
  */
-function commonStringPrefix(leftStr, rightStr) {
+function commonStringPrefix(leftAnyValue, rightAnyValue) {
+    const leftStr = Literal.toValue(leftAnyValue);
+    const rightStr = Literal.toValue(rightAnyValue);
+
     // The length of leftStr cannot be greater than that rightStr
     const minLen = leftStr.length > rightStr.length ? rightStr.length : leftStr.length;
     let commonStr = "";
@@ -26,56 +39,72 @@ function commonStringPrefix(leftStr, rightStr) {
     return commonStr === "" ? null : commonStr;
 }
 
-function commonPrefix(arr, sort = "high") {
-    const sortedArr = arr.slice().filter((value) => typeof value === "string").map((value) => value.toLowerCase()).sort();
-    const prefix = new Map();
-    const sortingFn = sort === "high" ?
-        (left, right) => right.commonPrefix.length - left.commonPrefix.length :
-        (left, right) => left.commonPrefix.length - right.commonPrefix.length;
+function reverseString(string) {
+    return string.split("").reverse().join("");
+}
 
-    mainLoop: for (const currentPrefix of sortedArr) {
-        const matchedItems = [];
-        if (!prefix.has(currentPrefix)) {
-            matchedItems.push({ commonPrefix: currentPrefix, commonStr: null });
-        }
+/**
+ * @description get the common string suffixes (at the end) pattern
+ * @param {!string} leftStr
+ * @param {!string} rightStr
+ * @returns {string | null}
+ *
+ * @example
+ * commonStringSuffix("boo", "foo"); // oo
+ * commonStringSuffix("bromance", "brother"); // null
+ */
+function commonStringSuffix(leftStr, rightStr) {
+    const commonPrefix = commonStringPrefix(
+        reverseString(leftStr),
+        reverseString(rightStr)
+    );
 
-        for (const commonPrefix of prefix.keys()) {
-            const commonStr = commonStringPrefix(currentPrefix, commonPrefix);
+    return commonPrefix === null ? null : reverseString(commonPrefix);
+}
+
+function commonHexadecimalPrefix(identifiersArray) {
+    if (!Array.isArray(identifiersArray)) {
+        throw new TypeError("identifiersArray must be an Array");
+    }
+    const prefix = new FrequencySet();
+
+    mainLoop: for (const value of identifiersArray.slice().sort()) {
+        for (const [cp, count] of prefix) {
+            const commonStr = commonStringPrefix(value, cp);
             if (commonStr === null) {
                 continue;
             }
-            matchedItems.push({ commonPrefix, commonStr });
-        }
-        matchedItems.sort(sortingFn);
 
-        for (const { commonPrefix, commonStr } of matchedItems) {
-            if (commonStr === null) {
-                break;
+            if (commonStr === cp || commonStr.startsWith(cp)) {
+                prefix.add(cp);
             }
-
-            const count = prefix.get(commonPrefix);
-            if (commonStr === commonPrefix || commonStr.startsWith(commonPrefix)) {
-                prefix.set(commonPrefix, count + 1);
-            }
-            else if (commonPrefix.startsWith(commonStr)) {
-                prefix.set(commonStr, count + 1);
+            else if (cp.startsWith(commonStr)) {
+                prefix.delete(cp);
+                prefix.add(commonStr, count + 1);
             }
             continue mainLoop;
         }
 
-        prefix.set(currentPrefix, 1);
+        prefix.add(value);
     }
 
+    // We remove one-time occurences (because they are normal variables)
+    let oneTimeOccurence = 0;
     for (const [key, value] of prefix.entries()) {
         if (value === 1) {
             prefix.delete(key);
+            oneTimeOccurence++;
         }
     }
 
-    return Object.fromEntries(prefix);
+    return {
+        oneTimeOccurence,
+        prefix: Object.fromEntries(prefix)
+    };
 }
 
 module.exports = {
     commonStringPrefix,
-    commonPrefix
+    commonStringSuffix,
+    commonHexadecimalPrefix
 };
