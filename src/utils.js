@@ -32,6 +32,23 @@ function isSvgPath(str) {
 }
 
 /**
+ * @description detect if a given string is a morse value.
+ * @param {!string} str any string value
+ * @returns {boolean}
+ */
+function isMorse(str) {
+    return /^[.-]{1,5}(?:[\s\t]+[.-]{1,5})*(?:[\s\t]+[.-]{1,5}(?:[\s\t]+[.-]{1,5})*)*$/g.test(str);
+}
+
+/**
+ * @param {!string} str any string value
+ * @returns {string}
+ */
+function escapeRegExp(str) {
+    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+/**
  * @description Get the number of unique chars in a given string
  * @param {!string} str string
  * @returns {number}
@@ -69,8 +86,10 @@ function stringSuspicionScore(str) {
 }
 
 module.exports = {
+    isMorse,
     isSvg,
     isSvgPath,
+    escapeRegExp,
     stringCharDiversity,
     stringSuspicionScore
 };
