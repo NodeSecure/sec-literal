@@ -12,6 +12,11 @@ test("stringCharDiversity must return the number of unique chars in a given stri
         .toStrictEqual(5, "the following string 'helloo!' contains five unique chars: h, e, l, o and !");
 });
 
+test("stringCharDiversity must return the number of unique chars in a given string (but with exclusions of given chars)", () => {
+    expect(stringCharDiversity("- - -\n", ["\n"]))
+        .toStrictEqual(2);
+});
+
 test("isSvg must return true for an HTML svg balise", () => {
     const SVGHTML = `<svg xmlns="http://www.w3.org/2000/svg"
         width="150" height="100" viewBox="0 0 3 2">

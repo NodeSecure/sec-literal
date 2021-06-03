@@ -51,10 +51,14 @@ function escapeRegExp(str) {
 /**
  * @description Get the number of unique chars in a given string
  * @param {!string} str string
+ * @param {string[]} [charsToExclude=[]]
  * @returns {number}
  */
-function stringCharDiversity(str) {
-    return new Set(str).size;
+function stringCharDiversity(str, charsToExclude = []) {
+    const data = new Set(str);
+    charsToExclude.forEach((char) => data.delete(char));
+
+    return data.size;
 }
 
 // ---
