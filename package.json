@@ -19,7 +19,7 @@
     "scanner"
   ],
   "files": [
-      "src"
+    "src"
   ],
   "author": "GENTILHOMME Thomas <gentilhomme.thomas@gmail.com>",
   "license": "MIT",
@@ -50,7 +50,7 @@
   "dependencies": {
     "frequency-set": "^1.0.1",
     "is-base64": "^1.1.0",
-    "is-svg": "^4.2.1",
+    "is-svg": "^4.3.1",
     "string-width": "^4.2.0"
   }
 }
