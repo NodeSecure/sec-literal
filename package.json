@@ -51,6 +51,6 @@
     "frequency-set": "^1.0.1",
     "is-base64": "^1.1.0",
     "is-svg": "^4.3.1",
-    "string-width": "^5.0.0"
+    "string-width": "^4.2.2"
   }
 }
