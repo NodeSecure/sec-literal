@@ -1,10 +1,9 @@
 # Sec-literal
-![version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/fraxken/sec-literal/master/package.json&query=$.version&label=Version)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/fraxken/sec-literal/commit-activity)
+![version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/NodeSecure/sec-literal/master/package.json&query=$.version&label=Version)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/NodeSecure/sec-literal/commit-activity)
 [![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md
 )
-[![mit](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/fraxken/sec-literal/blob/master/LICENSE)
-![dep](https://img.shields.io/david/fraxken/sec-literal)
+[![mit](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/NodeSecure/sec-literal/blob/master/LICENSE)
 
 This package is a security utilities library created to analyze [ESTree Literal](https://github.com/estree/estree/blob/master/es5.md#literal) and JavaScript string primitive. This project was originally created to simplify and better test the functionalities required for the SAST Scanner [JS-X-Ray](https://github.com/fraxken/js-x-ray).
 
@@ -19,9 +18,9 @@ This package is a security utilities library created to analyze [ESTree Literal]
 This package is available in the Node Package Repository and can be easily installed with [npm](https://docs.npmjs.com/getting-started/what-is-npm) or [yarn](https://yarnpkg.com).
 
 ```bash
-$ npm i sec-literal
+$ npm i @nodesecure/sec-literal
 # or
-$ yarn add sec-literal
+$ yarn add @nodesecure/sec-literal
 ```
 
 ## API

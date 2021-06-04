@@ -1,20 +1,18 @@
-"use strict";
+// Import Third-party Dependencies
+import isStringSvg from "is-svg";
+import stringWidth from "string-width";
 
-// Require Third-party Dependencies
-const isStringSvg = require("is-svg");
-const stringWidth = require("string-width");
-
-// Require Internal Dependencies
-const { toValue } = require("./literal");
+// Import Internal Dependencies
+import { toValue } from "./literal.js";
 
 /**
  * @param {SecLiteral.Literal | string} strOrLiteral
  * @returns {boolean}
  */
-function isSvg(strOrLiteral) {
-    const value = toValue(strOrLiteral);
+export function isSvg(strOrLiteral) {
+  const value = toValue(strOrLiteral);
 
-    return isStringSvg(value) || isSvgPath(value);
+  return isStringSvg(value) || isSvgPath(value);
 }
 
 /**
@@ -22,13 +20,13 @@ function isSvg(strOrLiteral) {
  * @param {!string} str svg path literal
  * @returns {boolean}
  */
-function isSvgPath(str) {
-    if (typeof str !== "string") {
-        return false;
-    }
-    const trimStr = str.trim();
+export function isSvgPath(str) {
+  if (typeof str !== "string") {
+    return false;
+  }
+  const trimStr = str.trim();
 
-    return trimStr.length > 4 && /^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(trimStr) && /[\dz]$/i.test(trimStr);
+  return trimStr.length > 4 && /^[mzlhvcsqta]\s*[-+.0-9][^mlhvzcsqta]+/i.test(trimStr) && /[\dz]$/i.test(trimStr);
 }
 
 /**
@@ -36,16 +34,16 @@ function isSvgPath(str) {
  * @param {!string} str any string value
  * @returns {boolean}
  */
-function isMorse(str) {
-    return /^[.-]{1,5}(?:[\s\t]+[.-]{1,5})*(?:[\s\t]+[.-]{1,5}(?:[\s\t]+[.-]{1,5})*)*$/g.test(str);
+export function isMorse(str) {
+  return /^[.-]{1,5}(?:[\s\t]+[.-]{1,5})*(?:[\s\t]+[.-]{1,5}(?:[\s\t]+[.-]{1,5})*)*$/g.test(str);
 }
 
 /**
  * @param {!string} str any string value
  * @returns {string}
  */
-function escapeRegExp(str) {
-    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+export function escapeRegExp(str) {
+  return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 /**
@@ -54,11 +52,11 @@ function escapeRegExp(str) {
  * @param {string[]} [charsToExclude=[]]
  * @returns {number}
  */
-function stringCharDiversity(str, charsToExclude = []) {
-    const data = new Set(str);
-    charsToExclude.forEach((char) => data.delete(char));
+export function stringCharDiversity(str, charsToExclude = []) {
+  const data = new Set(str);
+  charsToExclude.forEach((char) => data.delete(char));
 
-    return data.size;
+  return data.size;
 }
 
 // ---
@@ -72,28 +70,19 @@ const kScoreStringLengthThreshold = 750;
  * @param {!string} str string to analyze
  * @returns {number}
  */
-function stringSuspicionScore(str) {
-    const strLen = stringWidth(str);
-    if (strLen < kMaxSafeStringLen) {
-        return 0;
-    }
+export function stringSuspicionScore(str) {
+  const strLen = stringWidth(str);
+  if (strLen < kMaxSafeStringLen) {
+    return 0;
+  }
 
-    const includeSpace = str.includes(" ");
-    const includeSpaceAtStart = includeSpace ? str.slice(0, kMaxSafeStringLen).includes(" ") : false;
+  const includeSpace = str.includes(" ");
+  const includeSpaceAtStart = includeSpace ? str.slice(0, kMaxSafeStringLen).includes(" ") : false;
 
-    let suspectScore = includeSpaceAtStart ? 0 : 1;
-    if (strLen > kMinUnsafeStringLenThreshold) {
-        suspectScore += Math.ceil(strLen / kScoreStringLengthThreshold);
-    }
+  let suspectScore = includeSpaceAtStart ? 0 : 1;
+  if (strLen > kMinUnsafeStringLenThreshold) {
+    suspectScore += Math.ceil(strLen / kScoreStringLengthThreshold);
+  }
 
-    return stringCharDiversity(str) >= kMaxSafeStringCharDiversity ? suspectScore + 2 : suspectScore;
+  return stringCharDiversity(str) >= kMaxSafeStringCharDiversity ? suspectScore + 2 : suspectScore;
 }
-
-module.exports = {
-    isMorse,
-    isSvg,
-    isSvgPath,
-    escapeRegExp,
-    stringCharDiversity,
-    stringSuspicionScore
-};

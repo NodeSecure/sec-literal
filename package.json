@@ -1,15 +1,17 @@
 {
-  "name": "sec-literal",
-  "version": "1.2.0",
+  "name": "@nodesecure/sec-literal",
+  "version": "1.0.0",
   "description": "Package created to analyze JavaScript literals",
-  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint --ext .js",
-    "test": "jest --coverage && npm run lint"
+    "test": "cross-env esm-tape-runner 'test/*.spec.js' | tap-monkey",
+    "check": "cross-env npm run lint && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fraxken/sec-literal.git"
+    "url": "git+https://github.com/NodeSecure/sec-literal.git"
   },
   "keywords": [
     "security",
@@ -23,34 +25,22 @@
   ],
   "author": "GENTILHOMME Thomas <gentilhomme.thomas@gmail.com>",
   "license": "MIT",
-  "jest": {
-    "collectCoverageFrom": [
-      "**/src/**/*.js"
-    ],
-    "testEnvironment": "node",
-    "testMatch": [
-      "**/test/*.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/test/utils/",
-      "/test/fixtures/"
-    ]
-  },
   "bugs": {
-    "url": "https://github.com/fraxken/sec-literal/issues"
+    "url": "https://github.com/NodeSecure/sec-literal/issues"
   },
-  "homepage": "https://github.com/fraxken/sec-literal#readme",
+  "homepage": "https://github.com/NodeSecure/sec-literal#readme",
   "devDependencies": {
-    "@slimio/eslint-config": "^4.1.0",
+    "@nodesecure/eslint-config": "^1.0.0",
     "@slimio/is": "^1.5.1",
-    "@types/jest": "^26.0.15",
-    "jest": "^26.6.1"
+    "@small-tech/esm-tape-runner": "^1.0.3",
+    "@small-tech/tap-monkey": "^1.3.0",
+    "cross-env": "^7.0.3",
+    "tape": "^5.2.2"
   },
   "dependencies": {
     "frequency-set": "^1.0.1",
     "is-base64": "^1.1.0",
     "is-svg": "^4.3.1",
-    "string-width": "^4.2.2"
+    "string-width": "^5.0.0"
   }
 }
