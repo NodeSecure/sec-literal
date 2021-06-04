@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Package created to analyze JavaScript literals",
   "exports": "./src/index.js",
+  "private": false,
   "type": "module",
   "scripts": {
     "lint": "eslint --ext .js",
