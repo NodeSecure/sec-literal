@@ -6,7 +6,7 @@
   "commit": false,
   "contributors": [],
   "contributorsPerLine": 7,
-  "projectName": "vuln",
+  "projectName": "sec-literal",
   "projectOwner": "NodeSecure",
   "repoType": "github",
   "repoHost": "https://github.com",
