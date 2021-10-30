@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "lint": "eslint --ext .js",
-    "test": "cross-env esm-tape-runner 'test/*.spec.js' | tap-monkey",
-    "check": "cross-env npm run lint && npm test"
+    "test-only": "cross-env esm-tape-runner 'test/*.spec.js' | tap-monkey",
+    "test": "cross-env npm run lint && npm test"
   },
   "repository": {
     "type": "git",
