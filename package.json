@@ -1,6 +1,6 @@
 {
   "name": "@nodesecure/sec-literal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package created to analyze JavaScript literals",
   "exports": "./src/index.js",
   "private": false,
