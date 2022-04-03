@@ -37,6 +37,11 @@ test("isSvg of a SVG Path must return true", (tape) => {
   tape.end();
 });
 
+test("isSvg must return false for invalid XML string", (tape) => {
+  tape.strictEqual(isSvg("</a>"), false);
+  tape.end();
+});
+
 test("isSvgPath must return true when we give a valid svg path and false when the string is not valid", (tape) => {
   tape.strictEqual(isSvgPath("M150 0 L75 200 L225 200 Z"), true);
   tape.strictEqual(isSvgPath("M150"), false, "the length of an svg path must be always higher than four characters");
