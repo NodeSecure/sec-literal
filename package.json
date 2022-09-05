@@ -31,12 +31,12 @@
   },
   "homepage": "https://github.com/NodeSecure/sec-literal#readme",
   "devDependencies": {
-    "@nodesecure/eslint-config": "^1.4.1",
+    "@nodesecure/eslint-config": "^1.5.0",
     "@slimio/is": "^1.5.1",
     "@small-tech/esm-tape-runner": "^2.0.0",
     "@small-tech/tap-monkey": "^1.4.0",
     "cross-env": "^7.0.3",
-    "tape": "^5.5.3"
+    "tape": "^5.6.0"
   },
   "dependencies": {
     "frequency-set": "^1.0.2",
