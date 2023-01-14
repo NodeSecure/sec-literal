@@ -1,11 +1,25 @@
 // Import Internal Dependencies
 import * as Literal from "./literal.js";
+import * as Utils from "./utils.js";
+
+const kUnsafeHexValues = new Set([
+  "require",
+  "length"
+].map((value) => Buffer.from(value).toString("hex")));
 
 // CONSTANTS
-const kSafeHexValues = new Set(["0123456789", "123456789", "abcdef", "0123456789abcdef", "abcdef0123456789abcdef"]);
+const kSafeHexValues = new Set([
+  "0123456789",
+  "123456789",
+  "abcdef",
+  "abc123456789",
+  "0123456789abcdef",
+  "abcdef0123456789abcdef"
+]);
 
 export const CONSTANTS = Object.freeze({
-  SAFE_HEXA_VALUES: [...kSafeHexValues]
+  SAFE_HEXA_VALUES: [...kSafeHexValues],
+  UNSAFE_HEXA_VALUES: [...kUnsafeHexValues]
 });
 
 /**
@@ -26,10 +40,14 @@ export function isHex(anyValue) {
  */
 export function isSafe(anyValue) {
   const rawValue = Literal.toRaw(anyValue);
+  if (kUnsafeHexValues.has(rawValue)) {
+    return false;
+  }
 
-  if (/^[0-9]+$/g.test(rawValue) || rawValue.length <= 4) {
+  const charCount = Utils.stringCharDiversity(rawValue);
+  if (/^([0-9]+|[a-z]+|[A-Z]+)$/g.test(rawValue) || rawValue.length <= 5 || charCount <= 2) {
     return true;
   }
 
-  return [...kSafeHexValues].some((value) => rawValue.startsWith(value));
+  return [...kSafeHexValues].some((value) => rawValue.toLowerCase().startsWith(value));
 }
