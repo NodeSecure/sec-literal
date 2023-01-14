@@ -36,10 +36,22 @@ test("isHex() of a value that is not a string or an ESTree Literal must return f
   tape.end();
 });
 
-test("isSafe('00000000') must always return true", (tape) => {
-  const hexValue = "00000000";
+test("isSafe must return true for a value with a length lower or equal five characters", (tape) => {
+  tape.ok(isSafe("h2l5x"));
+  tape.end();
+});
 
-  tape.strictEqual(isSafe(hexValue), true, "a string with only numbers must always return true");
+test("isSafe must return true if the string diversity is only two characters or lower", (tape) => {
+  tape.ok(isSafe("aaaaaaaaaaaaaabbbbbbbbbbbbb"));
+  tape.end();
+});
+
+test("isSafe must always return true if argument is only number, lower or upper letters", (tape) => {
+  const values = ["00000000", "aaaaaaaa", "AAAAAAAAA"];
+
+  for (const hexValue of values) {
+    tape.ok(isSafe(hexValue));
+  }
   tape.end();
 });
 
@@ -47,7 +59,19 @@ test("isSafe() must always return true if the value start with one of the 'safe'
   for (const safeValue of CONSTANTS.SAFE_HEXA_VALUES) {
     const hexValue = safeValue + randomBytes(4).toString("hex");
 
-    tape.strictEqual(isSafe(hexValue), true);
+    tape.ok(isSafe(hexValue));
+  }
+  tape.end();
+});
+
+test("isSafe must return true because it start with a safe pattern (and it must lowerCase the string)", (tape) => {
+  tape.ok(isSafe("ABCDEF1234567890"));
+  tape.end();
+});
+
+test("isSafe() must always return false if the value start with one of the 'unsafe' values", (tape) => {
+  for (const unsafeValue of CONSTANTS.UNSAFE_HEXA_VALUES) {
+    tape.strictEqual(isSafe(unsafeValue), false);
   }
   tape.end();
 });
