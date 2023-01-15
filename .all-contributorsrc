@@ -26,6 +26,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "Badrri-Narayanan",
+      "name": "Badrri Narayanan S",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26011119?v=4",
+      "profile": "https://github.com/Badrri-Narayanan",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -33,5 +42,6 @@
   "projectOwner": "NodeSecure",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
