@@ -25,7 +25,11 @@ export const CONSTANTS = Object.freeze({
 /**
  * @description detect if the given string is an Hexadecimal value
  * @param {SecLiteral.Literal | string} anyValue
- * @returns {boolean}
+ * @returns boolean
+ * 
+ * @example
+ * isHex('4e20') // true
+ * isHex(20) // false
  */
 export function isHex(anyValue) {
   const value = Literal.toValue(anyValue);
@@ -36,7 +40,11 @@ export function isHex(anyValue) {
 /**
  * @description detect if the given string is a safe Hexadecimal value
  * @param {SecLiteral.Literal | string} anyValue
- * @returns {boolean}
+ * @returns boolean
+ * 
+ * @example
+ * isSafe('393d8') // true
+ * isSafe('7f196a64a870440000') // false
  */
 export function isSafe(anyValue) {
   const rawValue = Literal.toRaw(anyValue);
