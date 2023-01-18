@@ -1,11 +1,11 @@
 # Sec-literal
 
-![version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/NodeSecure/sec-literal/master/package.json&query=$.version&label=Version)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/NodeSecure/sec-literal/commit-activity)
+![version](https://img.shields.io/badge/dynamic/json.svg?style=for-the-badge&url=https://raw.githubusercontent.com/NodeSecure/sec-literal/master/package.json&query=$.version&label=Version)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/NodeSecure/sec-literal/commit-activity)
 [![OpenSSF
-Scorecard](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal/badge)](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal)
-[![mit](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/NodeSecure/sec-literal/blob/master/LICENSE)
-![build](https://img.shields.io/github/actions/workflow/status/NodeSecure/sec-literal/node.js.yml)
+Scorecard](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal/badge?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal)
+[![mit](https://img.shields.io/github/license/Naereen/StrapDown.js.svg?style=for-the-badge)](https://github.com/NodeSecure/sec-literal/blob/master/LICENSE)
+![build](https://img.shields.io/github/actions/workflow/status/NodeSecure/sec-literal/node.js.yml?style=for-the-badge)
 
 This package is a security utilities library created to analyze [ESTree Literal](https://github.com/estree/estree/blob/master/es5.md#literal) and JavaScript string primitive. This project was originally created to simplify and better test the functionalities required for the SAST Scanner [JS-X-Ray](https://github.com/fraxken/js-x-ray).
 
@@ -34,8 +34,8 @@ $ yarn add @nodesecure/sec-literal
 Detect if the given string is an Hexadecimal value
 
 ```js
-Hex.isHex('4e20') // true
-Hex.isHex(20) // false
+Hex.isHex("4e20"); // true
+Hex.isHex(20); // false
 ```
 
 ### isSafe(anyValue): boolean
@@ -43,8 +43,8 @@ Hex.isHex(20) // false
 Detect if the given string is a safe Hexadecimal value. The goal of this method is to eliminate false-positive.
 
 ```js
-Hex.isSafe('393d8') // true
-Hex.isSafe('7f196a64a870440000') // false
+Hex.isSafe("393d8"); // true
+Hex.isSafe("7f196a64a870440000"); // false
 ```
 
 ## Literal
@@ -154,13 +154,20 @@ Patterns.commonStringSuffix("bromance", "brother"); // null
 Return the number of one time occurences of hexadecimal prefixes and an object containing the list of prefixes and the number of occurences in a given array of hexadecimals.
 
 ```js
-Patterns.commonHexadecimalPrefix(["_0x33bb79", "foo", "_0x3c0c55", "_0x1185d5"]); // returns { oneTimeOccurence: 1, prefix: { _0x: 3 } }
+Patterns.commonHexadecimalPrefix([
+  "_0x33bb79",
+  "foo",
+  "_0x3c0c55",
+  "_0x1185d5",
+]); // returns { oneTimeOccurence: 1, prefix: { _0x: 3 } }
 ```
 
 ## Contributors ✨
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
