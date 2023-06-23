@@ -4,7 +4,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/NodeSecure/sec-literal/graphs/commit-activity)
 [![OpenSSF
 Scorecard](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal/badge?style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/NodeSecure/sec-literal)
-[![mit](https://img.shields.io/github/license/Naereen/StrapDown.js.svg?style=for-the-badge)](https://github.com/NodeSecure/sec-literal/blob/master/LICENSE)
+[![mit](https://img.shields.io/github/license/NodeSecure/sec-literal.svg?style=for-the-badge)](https://github.com/NodeSecure/sec-literal/blob/master/LICENSE)
 ![build](https://img.shields.io/github/actions/workflow/status/NodeSecure/sec-literal/node.js.yml?style=for-the-badge)
 
 This package is a security utilities library created to analyze [ESTree Literal](https://github.com/estree/estree/blob/master/es5.md#literal) and JavaScript string primitive. This project was originally created to simplify and better test the functionalities required for the SAST Scanner [JS-X-Ray](https://github.com/fraxken/js-x-ray).
