@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This package has been migrated to [JS-X-Ray workspaces](https://github.com/NodeSecure/js-x-ray?tab=readme-ov-file#workspaces)
+
 # Sec-literal
 
 ![version](https://img.shields.io/badge/dynamic/json.svg?style=for-the-badge&url=https://raw.githubusercontent.com/NodeSecure/sec-literal/master/package.json&query=$.version&label=Version)
